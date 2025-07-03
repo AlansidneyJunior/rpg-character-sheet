@@ -14,51 +14,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alan.rpg_character_sheet.model.RpgCharacter;
-import com.alan.rpg_character_sheet.repository.RpgCharacterRepository;
+import com.alan.rpg_character_sheet.service.RpgCharacterService;
 
 @RestController
 @RequestMapping("/api/characters")
 public class RpgCharacterController {
 
 	@Autowired
-	private RpgCharacterRepository characterRepository;
+	private RpgCharacterService characterService;
 
 	@GetMapping
 	public List<RpgCharacter> getAllCharacters() {
-		return characterRepository.findAll();
+		return characterService.findAll();
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<RpgCharacter> getCharacterById(@PathVariable Long id) {
-		return characterRepository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+		return characterService.findById(id)
+				.map(ResponseEntity::ok)
+				.orElse(ResponseEntity.notFound().build());
 	}
 
 	@PostMapping
 	public RpgCharacter createCharacter(@RequestBody RpgCharacter character) {
-		return characterRepository.save(character);
+		return characterService.create(character);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<RpgCharacter> updateCharacter(@PathVariable Long id, @RequestBody RpgCharacter updated) {
-		return characterRepository.findById(id).map(existing -> {
-			existing.setName(updated.getName());
-			existing.setClassType(updated.getClassType());
-			existing.setLevel(updated.getLevel());
-			existing.setRace(updated.getRace());
-			existing.setAlignment(updated.getAlignment());
-			existing.setXp(updated.getXp());
-			existing.setBackground(updated.getBackground());
-			return ResponseEntity.ok(characterRepository.save(existing));
-		}).orElse(ResponseEntity.notFound().build());
+		return characterService.update(id, updated)
+				.map(ResponseEntity::ok)
+				.orElse(ResponseEntity.notFound().build());
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteCharacter(@PathVariable Long id) {
-		if (characterRepository.existsById(id)) {
-			characterRepository.deleteById(id);
-			return ResponseEntity.noContent().build();
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+		return characterService.delete(id)
+	            ? ResponseEntity.noContent().build()
+	            : ResponseEntity.notFound().build();
 	}
 }
