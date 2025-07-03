@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alan.rpg_character_sheet.model.RpgCharacter;
 import com.alan.rpg_character_sheet.service.RpgCharacterService;
 
+
 @RestController
 @RequestMapping("/api/characters")
 public class RpgCharacterController {

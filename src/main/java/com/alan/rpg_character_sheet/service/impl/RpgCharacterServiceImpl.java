@@ -4,12 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.alan.rpg_character_sheet.model.RpgCharacter;
 import com.alan.rpg_character_sheet.repository.RpgCharacterRepository;
 import com.alan.rpg_character_sheet.service.RpgCharacterService;
 
+@Service
 public class RpgCharacterServiceImpl implements RpgCharacterService {
+	
 	@Autowired
 	private RpgCharacterRepository repository;
 
