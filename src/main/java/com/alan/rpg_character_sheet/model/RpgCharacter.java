@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -26,8 +28,9 @@ public class RpgCharacter {
 	@Column(nullable = false)
 	private Integer level;
 
-	@Column(nullable = false, length = 100)
-	private String race;
+	@ManyToOne
+	@JoinColumn(name = "race_id", nullable = false)
+	private Race race;
 
 	@Column(nullable = false, length = 100)
 	private String alignment;
@@ -45,13 +48,8 @@ public class RpgCharacter {
 
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public RpgCharacter(String name, String classType, Integer level, String race, String alignment, Integer xp,
-			String background) {
-		super();
+	public RpgCharacter(String name, String classType, Integer level, Race race, String alignment, Integer xp,
+			String background, AbilityScores abilityScores) {
 		this.name = name;
 		this.classType = classType;
 		this.level = level;
@@ -59,6 +57,11 @@ public class RpgCharacter {
 		this.alignment = alignment;
 		this.xp = xp;
 		this.background = background;
+		this.abilityScores = abilityScores;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public void setId(Long id) {
@@ -89,11 +92,11 @@ public class RpgCharacter {
 		this.level = level;
 	}
 
-	public String getRace() {
+	public Race getRace() {
 		return race;
 	}
 
-	public void setRace(String race) {
+	public void setRace(Race race) {
 		this.race = race;
 	}
 
@@ -121,9 +124,19 @@ public class RpgCharacter {
 		this.background = background;
 	}
 
-	@Override
-	public String toString() {
-		return "Character [id=" + id + ", name=" + name + "]";
+	public AbilityScores getAbilityScores() {
+		return abilityScores;
 	}
 
+	public void setAbilityScores(AbilityScores abilityScores) {
+		this.abilityScores = abilityScores;
+	}
+
+	@Override
+	public String toString() {
+		return "RpgCharacter [id=" + id + ", name=" + name + ", classType=" + classType + ", level=" + level + ", race="
+				+ race + ", alignment=" + alignment + ", xp=" + xp + ", background=" + background + ", abilityScores="
+				+ abilityScores + "]";
+	}
+	
 }

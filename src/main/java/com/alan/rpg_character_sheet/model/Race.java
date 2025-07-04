@@ -46,18 +46,19 @@ public class Race {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "bonus_ability_scores_id")
 	private AbilityScores bonusAbilityScores;
-	
+
 	public Race() {
 	}
 
-	public Race(String name, String description, Integer speed, Boolean darkVision, List<String> languages, Size size) {
-		super();
+	public Race(String name, String description, Integer speed, Boolean darkVision, List<String> languages, Size size,
+			AbilityScores bonusAbilityScores) {
 		this.name = name;
 		this.description = description;
 		this.speed = speed;
 		this.darkVision = darkVision;
 		this.languages = languages;
 		this.size = size;
+		this.bonusAbilityScores = bonusAbilityScores;
 	}
 
 	public Long getId() {
@@ -115,7 +116,7 @@ public class Race {
 	public void setSize(Size size) {
 		this.size = size;
 	}
-	
+
 	public AbilityScores getBonusAbilityScores() {
 		return bonusAbilityScores;
 	}
@@ -129,5 +130,5 @@ public class Race {
 		return "Race [id=" + id + ", name=" + name + ", description=" + description + ", speed=" + speed
 				+ ", darkVision=" + darkVision + ", languages=" + languages + ", size=" + size + "]";
 	}
-	
+
 }

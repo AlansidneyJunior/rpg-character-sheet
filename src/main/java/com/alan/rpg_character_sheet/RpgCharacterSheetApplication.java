@@ -15,15 +15,15 @@ public class RpgCharacterSheetApplication {
 		SpringApplication.run(RpgCharacterSheetApplication.class, args);
 	}
 	
-	@Bean
-	CommandLineRunner runner(RpgCharacterRepository characterRepository) {
-	    return args -> {
-	        RpgCharacter character = new RpgCharacter(
-	            "Thorin", "Warrior", 3, "Dwarf", "Lawful Good", 1200, "Soldier"
-	        );
-
-	        characterRepository.save(character);
-	        System.out.println("Character saved: " + character);
-	    };
-	}
+//	@Bean
+//	CommandLineRunner runner(RpgCharacterRepository characterRepository) {
+//	    return args -> {
+//	        RpgCharacter character = new RpgCharacter(
+//	            "Thorin", "Warrior", 3, "Dwarf", "Lawful Good", 1200, "Soldier"
+//	        );
+//
+//	        characterRepository.save(character);
+//	        System.out.println("Character saved: " + character);
+//	    };
+//	}
 }
