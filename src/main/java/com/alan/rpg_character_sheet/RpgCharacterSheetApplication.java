@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.alan.rpg_character_sheet.model.RpgCharacter;
+import com.alan.rpg_character_sheet.model.enums.Alignment;
 import com.alan.rpg_character_sheet.repository.RpgCharacterRepository;
 
 @SpringBootApplication

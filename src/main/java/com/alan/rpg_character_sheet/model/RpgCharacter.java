@@ -1,8 +1,12 @@
 package com.alan.rpg_character_sheet.model;
 
+import com.alan.rpg_character_sheet.model.enums.Alignment;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,8 +36,8 @@ public class RpgCharacter {
 	@JoinColumn(name = "race_id", nullable = false)
 	private Race race;
 
-	@Column(nullable = false, length = 100)
-	private String alignment;
+	@Enumerated(EnumType.STRING)
+	private Alignment alignment;
 
 	@Column(nullable = false)
 	private Integer xp;
@@ -48,7 +52,7 @@ public class RpgCharacter {
 
 	}
 
-	public RpgCharacter(String name, String classType, Integer level, Race race, String alignment, Integer xp,
+	public RpgCharacter(String name, String classType, Integer level, Race race, Alignment alignment, Integer xp,
 			String background, AbilityScores abilityScores) {
 		this.name = name;
 		this.classType = classType;
@@ -100,11 +104,11 @@ public class RpgCharacter {
 		this.race = race;
 	}
 
-	public String getAlignment() {
+	public Alignment getAlignment() {
 		return alignment;
 	}
 
-	public void setAlignment(String alignment) {
+	public void setAlignment(Alignment alignment) {
 		this.alignment = alignment;
 	}
 
