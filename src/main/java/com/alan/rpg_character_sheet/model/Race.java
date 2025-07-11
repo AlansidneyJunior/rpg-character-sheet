@@ -11,11 +11,15 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 
 @Entity
@@ -46,12 +50,20 @@ public class Race {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "bonus_ability_scores_id")
 	private AbilityScores bonusAbilityScores;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable( name = "race_proficiencies",
+				joinColumns = @JoinColumn(name = "race_id"),
+				inverseJoinColumns = @JoinColumn(name = "proficiency_id"))
+	@OrderBy("name ASC")
+	private List<Proficiency> proficiencies;
 
 	public Race() {
 	}
 
 	public Race(String name, String description, Integer speed, Boolean darkVision, List<String> languages, Size size,
-			AbilityScores bonusAbilityScores) {
+			AbilityScores bonusAbilityScores, List<Proficiency> proficiencies) {
+		super();
 		this.name = name;
 		this.description = description;
 		this.speed = speed;
@@ -59,6 +71,7 @@ public class Race {
 		this.languages = languages;
 		this.size = size;
 		this.bonusAbilityScores = bonusAbilityScores;
+		this.proficiencies = proficiencies;
 	}
 
 	public Long getId() {
@@ -123,6 +136,14 @@ public class Race {
 
 	public void setBonusAbilityScores(AbilityScores bonusAbilityScores) {
 		this.bonusAbilityScores = bonusAbilityScores;
+	}
+
+	public List<Proficiency> getProficiencies() {
+		return proficiencies;
+	}
+
+	public void setProficiencies(List<Proficiency> proficiencies) {
+		this.proficiencies = proficiencies;
 	}
 
 	@Override
