@@ -22,7 +22,7 @@ import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "class_type")
+@Table(name = "classtype")
 public class ClassType {
 	
 	@Id

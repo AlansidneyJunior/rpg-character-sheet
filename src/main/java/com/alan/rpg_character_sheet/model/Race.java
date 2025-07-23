@@ -48,7 +48,7 @@ public class Race {
 	private Size size;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "bonus_ability_scores_id")
+	@JoinColumn(name = "ability_scores_id")
 	private AbilityScores bonusAbilityScores;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
