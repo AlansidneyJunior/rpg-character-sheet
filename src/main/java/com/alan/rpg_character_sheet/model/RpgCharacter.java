@@ -26,8 +26,9 @@ public class RpgCharacter {
 	@Column(nullable = false, length = 100)
 	private String name;
 
-	@Column(nullable = false, length = 100)
-	private String classType;
+	@ManyToOne
+	@JoinColumn(name = "class_id", nullable = false)
+	private ClassType classType;
 
 	@Column(nullable = false)
 	private Integer level;
@@ -52,7 +53,7 @@ public class RpgCharacter {
 
 	}
 
-	public RpgCharacter(String name, String classType, Integer level, Race race, Alignment alignment, Integer xp,
+	public RpgCharacter(String name, ClassType classType, Integer level, Race race, Alignment alignment, Integer xp,
 			String background, AbilityScores abilityScores) {
 		this.name = name;
 		this.classType = classType;
@@ -80,11 +81,11 @@ public class RpgCharacter {
 		this.name = name;
 	}
 
-	public String getClassType() {
+	public ClassType getClassType() {
 		return classType;
 	}
 
-	public void setClassType(String classType) {
+	public void setClassType(ClassType classType) {
 		this.classType = classType;
 	}
 
@@ -138,9 +139,9 @@ public class RpgCharacter {
 
 	@Override
 	public String toString() {
-		return "RpgCharacter [id=" + id + ", name=" + name + ", classType=" + classType + ", level=" + level + ", race="
-				+ race + ", alignment=" + alignment + ", xp=" + xp + ", background=" + background + ", abilityScores="
-				+ abilityScores + "]";
+		return "RpgCharacter [id=" + id + ", name=" + name + ", classType=" + classType.toString() + ", level=" + level + ", race="
+				+ race.toString() + ", alignment=" + alignment.toString() + ", xp=" + xp + ", background=" + background + ", abilityScores="
+				+ abilityScores.toString() + "]";
 	}
 	
 }
